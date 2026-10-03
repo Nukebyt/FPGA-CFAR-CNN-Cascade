@@ -1,0 +1,20 @@
+Fitter Status : Successful - Sat Oct  3 22:35:24 2026
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+Revision Name : prescreen_probe
+Top-level Entity Name : prescreen_probe
+Family : Cyclone V
+Device : 5CSXFC6D6F31C6
+Timing Models : Final
+Logic utilization (in ALMs) : 826 / 41,910 ( 2 % )
+Total registers : 1345
+Total pins : 99 / 499 ( 20 % )
+Total virtual pins : 0
+Total block memory bits : 1,386,706 / 5,662,720 ( 24 % )
+Total RAM Blocks : 181 / 553 ( 33 % )
+Total DSP Blocks : 8 / 112 ( 7 % )
+Total HSSI RX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA RX Deserializers : 0 / 9 ( 0 % )
+Total HSSI TX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA TX Serializers : 0 / 9 ( 0 % )
+Total PLLs : 0 / 15 ( 0 % )
+Total DLLs : 0 / 4 ( 0 % )

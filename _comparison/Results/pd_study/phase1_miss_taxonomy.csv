@@ -1,0 +1,9 @@
+reason,ships,share_of_losses_%,Pd_points_%
+B RTL border: outer 8 px never evaluated (float model finds it),233,8.746246246246246,1.3745501740310306
+C gate / NMS: detected but no gated trigger on the ship,323,12.124624624624625,1.905492301339154
+D masked: bright clutter in the ring,53,1.9894894894894894,0.3126659194147838
+D masked: neighbouring ship in the ring,257,9.647147147147146,1.516134741313197
+D masked: other (variance / shape mismatch),8,0.3003003003003003,0.04719485576072208
+D masked: own ship in the ring (self-masking),1586,59.53453453453454,9.356380154563153
+"E1 low contrast, near miss (clean-sea margin -0.15..0 nat)",135,5.0675675675675675,0.7964131909621851
+"E2 low contrast, deep (below clean-sea threshold by > 0.15 nat)",69,2.59009009009009,0.40705563093622793

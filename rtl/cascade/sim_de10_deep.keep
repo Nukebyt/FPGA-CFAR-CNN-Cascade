@@ -1,0 +1,19 @@
+t=100000 cyc: wrapper st=2  core cst=5  fifo_count=22  n_events=24  cnn st=4  pf_busy=0  res_cnt=0
+t=200000 cyc: wrapper st=2  core cst=5  fifo_count=21  n_events=24  cnn st=4  pf_busy=0  res_cnt=0
+t=300000 cyc: wrapper st=2  core cst=5  fifo_count=20  n_events=24  cnn st=4  pf_busy=0  res_cnt=0
+t=400000 cyc: wrapper st=2  core cst=5  fifo_count=18  n_events=24  cnn st=4  pf_busy=0  res_cnt=1
+t=500000 cyc: wrapper st=2  core cst=5  fifo_count=17  n_events=24  cnn st=4  pf_busy=0  res_cnt=1
+t=600000 cyc: wrapper st=2  core cst=5  fifo_count=15  n_events=24  cnn st=4  pf_busy=0  res_cnt=2
+t=700000 cyc: wrapper st=2  core cst=5  fifo_count=14  n_events=24  cnn st=4  pf_busy=0  res_cnt=2
+t=800000 cyc: wrapper st=2  core cst=5  fifo_count=13  n_events=24  cnn st=4  pf_busy=0  res_cnt=2
+t=900000 cyc: wrapper st=2  core cst=5  fifo_count=11  n_events=24  cnn st=4  pf_busy=0  res_cnt=2
+t=1000000 cyc: wrapper st=2  core cst=5  fifo_count=10  n_events=24  cnn st=4  pf_busy=0  res_cnt=2
+t=1100000 cyc: wrapper st=2  core cst=5  fifo_count=8  n_events=24  cnn st=4  pf_busy=0  res_cnt=2
+t=1200000 cyc: wrapper st=2  core cst=5  fifo_count=7  n_events=24  cnn st=4  pf_busy=0  res_cnt=2
+t=1300000 cyc: wrapper st=2  core cst=5  fifo_count=6  n_events=24  cnn st=4  pf_busy=0  res_cnt=3
+t=1400000 cyc: wrapper st=2  core cst=5  fifo_count=4  n_events=24  cnn st=4  pf_busy=0  res_cnt=3
+t=1500000 cyc: wrapper st=2  core cst=5  fifo_count=3  n_events=24  cnn st=4  pf_busy=0  res_cnt=4
+t=1600000 cyc: wrapper st=2  core cst=5  fifo_count=2  n_events=24  cnn st=4  pf_busy=0  res_cnt=5
+t=1700000 cyc: wrapper st=2  core cst=5  fifo_count=0  n_events=24  cnn st=4  pf_busy=0  res_cnt=6
+wrapper: 12543 det pulses; candidate events (HEX5..3) = 018, accepted (HEX2..0) = 007; LEDR=0111000001
+tb/cascade_de10_top_tb.v:39: $finish called at 34924390000 (1ps)

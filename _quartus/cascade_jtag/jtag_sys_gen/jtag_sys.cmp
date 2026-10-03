@@ -1,0 +1,15 @@
+	component jtag_sys is
+		port (
+			avm_address       : out std_logic_vector(31 downto 0);                    -- address
+			avm_readdata      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			avm_read          : out std_logic;                                        -- read
+			avm_write         : out std_logic;                                        -- write
+			avm_writedata     : out std_logic_vector(31 downto 0);                    -- writedata
+			avm_waitrequest   : in  std_logic                     := 'X';             -- waitrequest
+			avm_readdatavalid : in  std_logic                     := 'X';             -- readdatavalid
+			avm_byteenable    : out std_logic_vector(3 downto 0);                     -- byteenable
+			clk_clk           : in  std_logic                     := 'X';             -- clk
+			reset_reset_n     : in  std_logic                     := 'X'              -- reset_n
+		);
+	end component jtag_sys;
+

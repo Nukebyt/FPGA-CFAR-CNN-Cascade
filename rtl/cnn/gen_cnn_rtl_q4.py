@@ -1,0 +1,147 @@
+# -*- coding: utf-8 -*-
+"""RTL inputs for cnn_core_q4.v (quad-pixel, 4-bank activation layout) from an exported INT8 model.
+
+The weight / bias / multiplier images are IDENTICAL to gen_cnn_rtl.py's (same lane-major words, same tap
+order) -- only the layer table differs, because the feature maps live in 4 parity banks and every pass
+computes a 2x2 quad of output pixels:
+
+    bank(y,x) = 2*(y&1) + (x&1)          addr = c*BSZ + (y>>1)*WB + (x>>1)      WB = ceil(W/2), BSZ = ceil(H/2)*WB
+
+Layer modes (L_MODE):  0 = ONE   single output pixel (FC layers; FC-after-conv is a K=H conv with 1x1 output)
+                       1 = QUAD  conv, no pool: 4 outputs per lane per pass, one per bank
+                       2 = POOL  conv + 2x2 max-pool: the quad IS the pool window; max is taken on the raw
+                                 accumulators (requant is monotone, so max-then-requant == requant-then-max)
+
+usage: python gen_cnn_rtl_q4.py <export_dir> <out_dir> --lanes 32
+"""
+import argparse
+import json
+import math
+import os
+
+
+def rd_hex(path, bits, signed):
+    out = []
+    for line in open(path):
+        line = line.strip()
+        if line:
+            v = int(line, 16)
+            if signed and v >= 1 << (bits - 1):
+                v -= 1 << bits
+            out.append(v)
+    return out
+
+
+def cdiv2(v):
+    return (v + 1) // 2
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("export_dir")
+    ap.add_argument("out_dir")
+    ap.add_argument("--lanes", type=int, default=32)
+    a = ap.parse_args()
+    L = a.lanes
+    man = json.load(open(os.path.join(a.export_dir, "manifest.json")))
+    nin = man["net_input"]
+    os.makedirs(a.out_dir, exist_ok=True)
+
+    layers = []
+    cur_c, cur_h = 1, nin
+    wwords, pqwords = [], []
+    wbase = pbase = 0
+    bank_depth = cur_c * cdiv2(cur_h) * cdiv2(cur_h)
+    est = 0
+    for i, ent in enumerate(man["layers"]):
+        base = ent["name"]
+        W = rd_hex(os.path.join(a.export_dir, base + "_w.hex"), 8, True)
+        bias = rd_hex(os.path.join(a.export_dir, base + "_b.hex"), 32, True)
+        shp = ent["W_shape"]
+        pool, relu = int(ent["pool"]), int(ent["relu"])
+        if ent["kind"] == "conv":
+            cout, cin, k, _ = shp
+            assert cin == cur_c
+            hin = cur_h
+        else:                                   # FC: a conv whose kernel covers the whole incoming map
+            cout, cflat = shp
+            if cur_h > 1:
+                k, cin, hin = cur_h, cur_c, cur_h
+                assert cflat == cin * k * k
+            else:
+                k, cin, hin = 1, cflat, 1
+                assert cflat == cur_c
+        hout = hin - k + 1
+        T = cin * k * k
+        G = math.ceil(cout / L)
+        if hout == 1:
+            mode, qh = 0, 1
+            hmap = 1
+        elif pool:
+            assert hout % 2 == 0, "pooled conv output must be even"
+            mode, qh = 2, hout // 2
+            hmap = hout // 2
+        else:
+            assert hout % 2 == 0, "non-pooled quad conv output must be even"
+            mode, qh = 1, hout // 2
+            hmap = hout
+        wb_in = cdiv2(hin)
+        bsz_in = cdiv2(hin) * wb_in
+        wb_o = cdiv2(hmap)
+        bsz_o = cdiv2(hmap) * wb_o
+        M = rd_hex(os.path.join(a.export_dir, base + "_m.hex"), 16, False) if relu else [0] * cout
+        shift = ent.get("shift", 0) or 0
+        for g in range(G):
+            for t in range(T):
+                word = 0
+                for l in range(L):
+                    ch = g * L + l
+                    v = W[ch * T + t] if ch < cout else 0
+                    word |= (v & 0xFF) << (8 * l)
+                wwords.append(word)
+        for g in range(G):
+            for l in range(L):
+                ch = g * L + l
+                pqwords.append((((bias[ch] if ch < cout else 0) & 0xFFFFFFFF) << 16) | ((M[ch] if ch < cout else 0) & 0xFFFF))
+        layers.append(dict(K=k, Cin=cin, Cout=cout, T=T, G=G, relu=relu, S=shift, WBASE=wbase, PBASE=pbase,
+                           MODE=mode, QH=qh, QW=qh, WB_IN=wb_in, BSZ_IN=bsz_in, WB_O=wb_o, BSZ_O=bsz_o))
+        est += G * qh * qh * T
+        wbase += G * T
+        pbase += G * L
+        bank_depth = max(bank_depth, cout * bsz_o)
+        cur_c, cur_h = cout, hmap
+    assert layers[-1]["relu"] == 0 and layers[-1]["Cout"] == 1
+
+    aw = max(1, math.ceil(math.log2(bank_depth)))
+    waw = max(1, math.ceil(math.log2(wbase)))
+    pqaw = max(1, math.ceil(math.log2(pbase)))
+    tw = max(1, math.ceil(math.log2(max(l["T"] for l in layers) + 1)))
+    with open(os.path.join(a.out_dir, "cnn_w.hex"), "w") as f:
+        for w in wwords:
+            f.write(format(w, "0%dx" % (L * 2)) + "\n")
+    with open(os.path.join(a.out_dir, "cnn_pq.hex"), "w") as f:
+        for w in pqwords:
+            f.write(format(w, "012x") + "\n")
+    fields = ["K", "Cin", "Cout", "T", "G", "relu", "S", "WBASE", "PBASE", "MODE", "QH", "QW", "WB_IN", "BSZ_IN", "WB_O", "BSZ_O"]
+    lines = ["// generated by gen_cnn_rtl_q4.py -- do not edit",
+             f"localparam integer NL = {len(layers)};", f"localparam integer NIN = {nin};",
+             f"localparam integer BANK_DEPTH = {bank_depth};", f"localparam integer AW = {aw};",
+             f"localparam integer WDEPTH = {wbase};", f"localparam integer WAW = {waw};",
+             f"localparam integer PQDEPTH = {pbase};", f"localparam integer PQAW = {pqaw};",
+             f"localparam integer TW = {tw};", f"localparam integer LANES_GEN = {L};",
+             f"localparam integer WB_NIN = {cdiv2(nin)};"]
+    for fld in fields:
+        lines.append(f"function integer L_{fld}; input integer l; begin case (l)")
+        for i, ly in enumerate(layers):
+            lines.append(f"    {i}: L_{fld} = {ly[fld]};")
+        lines.append(f"    default: L_{fld} = 0; endcase end endfunction")
+    open(os.path.join(a.out_dir, "cnn_cfg.vh"), "w").write("\n".join(lines) + "\n")
+    json.dump(dict(lanes=L, layers=layers, est_issue_cycles=est, bank_depth=bank_depth), open(os.path.join(a.out_dir, "cnn_params.json"), "w"), indent=1)
+    print(f"{len(layers)} layers, L={L}: bank depth {bank_depth} x4 banks x2 buffers, ~{est} MAC-issue cycles/patch (quad)")
+    for i, l in enumerate(layers):
+        print(f"  L{i}: mode={l['MODE']} K={l['K']} Cin={l['Cin']} Cout={l['Cout']} T={l['T']} G={l['G']} quads={l['QH']}x{l['QW']} "
+              f"in(WB={l['WB_IN']},BSZ={l['BSZ_IN']}) out(WB={l['WB_O']},BSZ={l['BSZ_O']})")
+
+
+if __name__ == "__main__":
+    main()

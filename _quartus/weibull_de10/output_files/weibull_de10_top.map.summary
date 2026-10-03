@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Thu Oct  1 22:13:16 2026
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+Revision Name : weibull_de10_top
+Top-level Entity Name : weibull_de10_top
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 16899
+Total pins : 9
+Total virtual pins : 0
+Total block memory bits : 313,710
+Total DSP Blocks : 13
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0
+Total DLLs : 0

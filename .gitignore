@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.vvp
+db/
+incremental_db/
+*.log

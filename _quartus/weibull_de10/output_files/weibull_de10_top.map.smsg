@@ -1,0 +1,2 @@
+Warning (10268): Verilog HDL information at box_sum_inc.v(72): always construct contains both blocking and non-blocking assignments File: F:/Projects/CFAR/rtl/common/box_sum_inc.v Line: 72
+Warning (10268): Verilog HDL information at line_buffer.v(219): always construct contains both blocking and non-blocking assignments File: F:/Projects/CFAR/rtl/common/line_buffer.v Line: 219

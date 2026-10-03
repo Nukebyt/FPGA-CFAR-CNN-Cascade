@@ -1,0 +1,3 @@
+QUARTUS_VERSION = "21.1"
+DATE = "2026-10-01"
+PROJECT_REVISION = "weibull_de10_top"

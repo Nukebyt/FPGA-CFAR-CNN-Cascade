@@ -1,0 +1,20 @@
+Fitter Status : Successful - Sat Oct  3 23:46:00 2026
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+Revision Name : cascade_ps_jtag_top
+Top-level Entity Name : cascade_ps_jtag_top
+Family : Cyclone V
+Device : 5CSXFC6D6F31C6
+Timing Models : Final
+Logic utilization (in ALMs) : 11,172 / 41,910 ( 27 % )
+Total registers : 17389
+Total pins : 55 / 499 ( 11 % )
+Total virtual pins : 0
+Total block memory bits : 2,634,202 / 5,662,720 ( 47 % )
+Total RAM Blocks : 397 / 553 ( 72 % )
+Total DSP Blocks : 74 / 112 ( 66 % )
+Total HSSI RX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA RX Deserializers : 0 / 9 ( 0 % )
+Total HSSI TX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA TX Serializers : 0 / 9 ( 0 % )
+Total PLLs : 1 / 15 ( 7 % )
+Total DLLs : 0 / 4 ( 0 % )

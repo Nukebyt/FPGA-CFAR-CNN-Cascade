@@ -1,0 +1,82 @@
+{
+ "A_25_17_3e-2|float_exact": {
+  "recall": 0.9959294436906377,
+  "inshore": 0.9918352425054838,
+  "offshore": 0.9997712978845055,
+  "ships": 16951,
+  "n_inshore": 8206,
+  "n_offshore": 8745,
+  "events_per_img": 181.23376159885797,
+  "offship_per_img": 166.06763026409706
+ },
+ "A_25_17_3e-2|fixed": {
+  "recall": 0.9961064243997404,
+  "inshore": 0.9922008286619547,
+  "offshore": 0.9997712978845055,
+  "ships": 16951,
+  "n_inshore": 8206,
+  "n_offshore": 8745,
+  "events_per_img": 181.151142041399,
+  "offship_per_img": 165.95413990007137
+ },
+ "B_17_13_1e-2|float_exact": {
+  "recall": 0.9853695947141762,
+  "inshore": 0.9717280038995857,
+  "offshore": 0.9981703830760434,
+  "ships": 16951,
+  "n_inshore": 8206,
+  "n_offshore": 8745,
+  "events_per_img": 90.56299072091363,
+  "offship_per_img": 77.66630977872948
+ },
+ "B_17_13_1e-2|fixed": {
+  "recall": 0.9859005368414843,
+  "inshore": 0.9729466244211552,
+  "offshore": 0.9980560320182962,
+  "ships": 16951,
+  "n_inshore": 8206,
+  "n_offshore": 8745,
+  "events_per_img": 90.80977872947895,
+  "offship_per_img": 77.86438258386866
+ },
+ "B_17_13_1e-3|float_exact": {
+  "recall": 0.9720960415314731,
+  "inshore": 0.9483304898854497,
+  "offshore": 0.9943967981703831,
+  "ships": 16951,
+  "n_inshore": 8206,
+  "n_offshore": 8745,
+  "events_per_img": 82.32922912205568,
+  "offship_per_img": 70.74946466809422
+ },
+ "B_17_13_1e-3|fixed": {
+  "recall": 0.972685977228482,
+  "inshore": 0.9495491104070193,
+  "offshore": 0.9943967981703831,
+  "ships": 16951,
+  "n_inshore": 8206,
+  "n_offshore": 8745,
+  "events_per_img": 82.57512491077802,
+  "offship_per_img": 70.94807280513919
+ },
+ "B_17_13_1e-4|float_exact": {
+  "recall": 0.9465518258509823,
+  "inshore": 0.9037289787960029,
+  "offshore": 0.986735277301315,
+  "ships": 16951,
+  "n_inshore": 8206,
+  "n_offshore": 8745,
+  "events_per_img": 72.36937901498929,
+  "offship_per_img": 62.02373304782299
+ },
+ "B_17_13_1e-4|fixed": {
+  "recall": 0.947259748687393,
+  "inshore": 0.9049475993175725,
+  "offshore": 0.9869639794168096,
+  "ships": 16951,
+  "n_inshore": 8206,
+  "n_offshore": 8745,
+  "events_per_img": 72.60117773019272,
+  "offship_per_img": 62.215024982155605
+ }
+}

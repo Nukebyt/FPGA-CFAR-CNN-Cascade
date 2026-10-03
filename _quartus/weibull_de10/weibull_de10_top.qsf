@@ -1,0 +1,71 @@
+# weibull_de10_top.qsf -- Quartus Prime Lite project settings for the
+# STANDALONE PHYSICAL BRING-UP bitstream (weibull_de10_top.v), part of
+# "5 model switching" (DE10_BRINGUP.md's "Extending to the other 4
+# detectors"). Direct copy of gengamma_de10_top.qsf's structure (same
+# device, same confirmed real pins, same Quartus Prime Lite 21.1 workarounds)
+# with the file list/top-level swapped for Weibull.
+
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSXFC6D6F31C6
+set_global_assignment -name TOP_LEVEL_ENTITY weibull_de10_top
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "21.1"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name EDA_SIMULATION_TOOL "<None>"
+
+set_global_assignment -name VERILOG_FILE "../../CFAR_Weibull/rtl/weibull_de10_top.v"
+set_global_assignment -name VERILOG_FILE "../../CFAR_Weibull/rtl/weibull_top_new.v"
+set_global_assignment -name VERILOG_FILE "../../CFAR_Weibull/rtl/weibull_backend_new.v"
+set_global_assignment -name VERILOG_FILE "../../CFAR_Weibull/rtl/weibull_delta_rom.v"
+set_global_assignment -name VERILOG_FILE "../../rtl/common/front_end3.v"
+set_global_assignment -name VERILOG_FILE "../../rtl/common/power_expand.v"
+set_global_assignment -name VERILOG_FILE "../../rtl/common/box_sum_inc.v"
+set_global_assignment -name VERILOG_FILE "../../rtl/common/molc_estimator3.v"
+set_global_assignment -name VERILOG_FILE "../../rtl/common/log_amp_rom.v"
+set_global_assignment -name VERILOG_FILE "../../rtl/common/line_buffer.v"
+set_global_assignment -name VERILOG_FILE "../../rtl/common/row_delay_mem.v"
+set_global_assignment -name VERILOG_FILE "../../rtl/common/pipe_delay.v"
+set_global_assignment -name VERILOG_FILE "../../rtl/common/linear_addr.v"
+set_global_assignment -name VERILOG_FILE "../../rtl/common/threshold_compare3.v"
+
+# weibull_demo_image reuses gengamma_demo_image.hex verbatim (see
+# DE10_BRINGUP.md: "the same 40x48 image and hex file can be reused
+# verbatim across all 5 -- the pixel data doesn't depend on which detector
+# processes it"), copied into this directory since $readmemh resolves
+# relative to quartus_map's working directory.
+
+# Same Quartus Prime Lite 21.1 workarounds as every other detector's board
+# project (BUG_LOG D21): an internal compiler crash on this shared
+# line_buffer.v/row_delay_mem.v RTL, and an out-of-memory crash from
+# default 12-way parallelism.
+set_global_assignment -name AUTO_CARRY_CHAINS OFF
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 4
+
+set_global_assignment -name SDC_FILE weibull_de10_top.sdc
+
+# ---- Real DE10-Standard pin assignments (verbatim from DE10_Standard_GHRD.qsf) ----
+set_location_assignment PIN_AF14 -to CLOCK_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_50
+
+set_location_assignment PIN_AJ4 -to KEY[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[0]
+set_location_assignment PIN_AK4 -to KEY[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[1]
+
+set_location_assignment PIN_AB30 -to SW[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to SW[0]
+set_location_assignment PIN_Y27 -to SW[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to SW[1]
+
+set_location_assignment PIN_AA24 -to LEDR[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[0]
+set_location_assignment PIN_AB23 -to LEDR[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[1]
+set_location_assignment PIN_AC23 -to LEDR[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[2]
+set_location_assignment PIN_AD24 -to LEDR[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[3]
+
+set_global_assignment -name LAST_QUARTUS_VERSION "21.1.0 Lite Edition"

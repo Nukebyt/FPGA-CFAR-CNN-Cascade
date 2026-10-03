@@ -1,0 +1,18 @@
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; worst setup                                                                                                                                            ;
++--------+-----------------------------------+-------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                         ; To Node                             ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-----------------------------------+-------------------------------------+--------------+-------------+--------------+------------+------------+
+; -0.571 ; prescreen_top:dut|peak5:pk|h1[13] ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.100     ; 10.301     ;
+; -0.565 ; prescreen_top:dut|peak5:pk|x[8]   ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.120     ; 10.275     ;
+; -0.555 ; prescreen_top:dut|peak5:pk|x[7]   ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.124     ; 10.261     ;
+; -0.547 ; prescreen_top:dut|peak5:pk|x[8]   ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.120     ; 10.257     ;
+; -0.544 ; prescreen_top:dut|peak5:pk|h1[13] ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.100     ; 10.274     ;
+; -0.539 ; prescreen_top:dut|peak5:pk|x[8]   ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.120     ; 10.249     ;
+; -0.537 ; prescreen_top:dut|peak5:pk|x[7]   ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.124     ; 10.243     ;
+; -0.532 ; prescreen_top:dut|peak5:pk|h1[13] ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.100     ; 10.262     ;
+; -0.530 ; prescreen_top:dut|peak5:pk|h1[13] ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.100     ; 10.260     ;
+; -0.529 ; prescreen_top:dut|peak5:pk|x[7]   ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.124     ; 10.235     ;
+; -0.522 ; prescreen_top:dut|peak5:pk|h1[13] ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.100     ; 10.252     ;
+; -0.515 ; prescreen_top:dut|peak5:pk|x[4]   ; prescreen_top:dut|peak5:pk|s1_hm[9] ; clk          ; clk         ; 10.000       ; -0.124     ; 10.221     ;
++--------+-----------------------------------+-------------------------------------+--------------+-------------+--------------+------------+------------+

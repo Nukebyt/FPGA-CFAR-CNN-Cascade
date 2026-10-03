@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Sat Oct  3 12:02:55 2026
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+Revision Name : cascade_de10_top
+Top-level Entity Name : cascade_de10_top
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 28163
+Total pins : 65
+Total virtual pins : 0
+Total block memory bits : 1,220,702
+Total DSP Blocks : 78
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 1
+Total DLLs : 0

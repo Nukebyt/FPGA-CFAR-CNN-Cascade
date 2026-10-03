@@ -1,0 +1,12 @@
+Quartus projects that belong to Paper 2 (Weibull prescreen + CNN cascade):
+  cascade_de10/   board bitstream (128x128 on-chip demo)
+  cascade_deep/   full cascade @800x800 resource/timing probe
+  cnn_core_deep/  CNN core alone
+  weibull_w800/   Weibull prescreen @ IMG_WIDTH=800 (memory-budget probe)
+All other directories here (weibull, lognormal, gengamma, burr, g0, *_de10, multi_detector, gg_burr_probe, _ram_probe) are Paper 3
+(multi-model hardware, see ../PAPER3_ROADMAP_multimodel-hardware.md) and are not touched by Paper 2 work.
+Paper 2 projects read the shared RTL in ../rtl/common and ../CFAR_Weibull/rtl but do not modify it.
+  cnn_core_q4_deep/   quad-pixel CNN core alone (resource/Fmax probe)
+  cascade_2clk_deep/  two-clock cascade @800x800 with the quad DEEP core (resource/timing probe)
+  cascade_2clk_xl/    same with XL (does it fit at 800x800?)
+  cascade_jtag/       JTAG-fed cascade @800x800 for the 250-image board sweep (Qsys JTAG master; rtl/cascade/jtag/)

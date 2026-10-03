@@ -1,0 +1,210 @@
+{
+ "n_images": 5604,
+ "n_ships": 16951,
+ "pd_by_definition": [
+  {
+   "model": "float",
+   "pfa": 0.1,
+   "boxHit": 1.0,
+   "maskHit": 0.9998820128605982,
+   "evComp": 0.8523980886083417,
+   "evMask": 0.8377676833225178,
+   "pix_pfa": 0.1031574876463553,
+   "trig_img": 29429.57119914347,
+   "gated_img": 98.89275517487509
+  },
+  {
+   "model": "float",
+   "pfa": 0.03,
+   "boxHit": 0.9961654179694414,
+   "maskHit": 0.9928027844964898,
+   "evComp": 0.9365229190018288,
+   "evMask": 0.9333962598076809,
+   "pix_pfa": 0.03734100992057224,
+   "trig_img": 13552.211277658815,
+   "gated_img": 222.37919343326195
+  },
+  {
+   "model": "float",
+   "pfa": 0.01,
+   "boxHit": 0.9797062120228895,
+   "maskHit": 0.9674355495251018,
+   "evComp": 0.9442510766326471,
+   "evMask": 0.9397085717656776,
+   "pix_pfa": 0.016890829546684905,
+   "trig_img": 6494.119022127052,
+   "gated_img": 282.62080656673805
+  },
+  {
+   "model": "float",
+   "pfa": 0.003,
+   "boxHit": 0.9461978644327769,
+   "maskHit": 0.9149312724912985,
+   "evComp": 0.9179399445460444,
+   "evMask": 0.9052563270603504,
+   "pix_pfa": 0.008110216710259974,
+   "trig_img": 3090.491256245539,
+   "gated_img": 291.69343326195576
+  },
+  {
+   "model": "float",
+   "pfa": 0.001,
+   "boxHit": 0.9055512949088549,
+   "maskHit": 0.8596542976815527,
+   "evComp": 0.8815409120405876,
+   "evMask": 0.8581794584390301,
+   "pix_pfa": 0.004628608438170199,
+   "trig_img": 1691.4482512491077,
+   "gated_img": 272.02997858672376
+  },
+  {
+   "model": "float",
+   "pfa": 0.0001,
+   "boxHit": 0.7961182231136806,
+   "maskHit": 0.7338800070792284,
+   "evComp": 0.7758244351365701,
+   "evMask": 0.7381865376673943,
+   "pix_pfa": 0.0018708371800801795,
+   "trig_img": 603.5601356174161,
+   "gated_img": 204.75374732334046
+  },
+  {
+   "model": "float",
+   "pfa": 1e-05,
+   "boxHit": 0.688042003421627,
+   "maskHit": 0.6214972567990089,
+   "evComp": 0.6741785145419149,
+   "evMask": 0.6291074272904253,
+   "pix_pfa": 0.0009807259705434566,
+   "trig_img": 281.8772305496074,
+   "gated_img": 142.99571734475376
+  },
+  {
+   "model": "float",
+   "pfa": 1e-06,
+   "boxHit": 0.5926494012152675,
+   "maskHit": 0.5290543330776946,
+   "evComp": 0.5811456551235915,
+   "evMask": 0.5356616128841957,
+   "pix_pfa": 0.0006063922673628024,
+   "trig_img": 160.732869379015,
+   "gated_img": 99.84546752319771
+  },
+  {
+   "model": "hardware",
+   "pfa": 0.001,
+   "boxHit": 0.8907439089139284,
+   "maskHit": 0.845554834523037,
+   "evComp": 0.8666155389062592,
+   "evMask": 0.8428411303167954,
+   "pix_pfa": NaN,
+   "trig_img": NaN,
+   "gated_img": 272.02997858672376
+  },
+  {
+   "model": "hardware",
+   "pfa": 0.0001,
+   "boxHit": 0.7817827856763613,
+   "maskHit": 0.7216093445814407,
+   "evComp": 0.7615479912689517,
+   "evMask": 0.7246180166361866,
+   "pix_pfa": NaN,
+   "trig_img": NaN,
+   "gated_img": 204.75374732334046
+  },
+  {
+   "model": "hardware",
+   "pfa": 1e-05,
+   "boxHit": 0.6747094566692231,
+   "maskHit": 0.6097575364285293,
+   "evComp": 0.6614359034865199,
+   "evMask": 0.616659784083535,
+   "pix_pfa": NaN,
+   "trig_img": NaN,
+   "gated_img": 142.99571734475376
+  },
+  {
+   "model": "hardware",
+   "pfa": 1e-06,
+   "boxHit": 0.5804377322871807,
+   "maskHit": 0.5181405226830276,
+   "evComp": 0.5688159990561029,
+   "evMask": 0.5237449118046132,
+   "pix_pfa": NaN,
+   "trig_img": NaN,
+   "gated_img": 99.84546752319771
+  }
+ ],
+ "taxonomy": [
+  {
+   "reason": "B RTL border: outer 8 px never evaluated (float model finds it)",
+   "ships": 233,
+   "share_of_losses_%": 8.746246246246246,
+   "Pd_points_%": 1.3745501740310306
+  },
+  {
+   "reason": "C gate / NMS: detected but no gated trigger on the ship",
+   "ships": 323,
+   "share_of_losses_%": 12.124624624624625,
+   "Pd_points_%": 1.905492301339154
+  },
+  {
+   "reason": "D masked: bright clutter in the ring",
+   "ships": 53,
+   "share_of_losses_%": 1.9894894894894894,
+   "Pd_points_%": 0.3126659194147838
+  },
+  {
+   "reason": "D masked: neighbouring ship in the ring",
+   "ships": 257,
+   "share_of_losses_%": 9.647147147147146,
+   "Pd_points_%": 1.516134741313197
+  },
+  {
+   "reason": "D masked: other (variance / shape mismatch)",
+   "ships": 8,
+   "share_of_losses_%": 0.3003003003003003,
+   "Pd_points_%": 0.04719485576072208
+  },
+  {
+   "reason": "D masked: own ship in the ring (self-masking)",
+   "ships": 1586,
+   "share_of_losses_%": 59.53453453453454,
+   "Pd_points_%": 9.356380154563153
+  },
+  {
+   "reason": "E1 low contrast, near miss (clean-sea margin -0.15..0 nat)",
+   "ships": 135,
+   "share_of_losses_%": 5.0675675675675675,
+   "Pd_points_%": 0.7964131909621851
+  },
+  {
+   "reason": "E2 low contrast, deep (below clean-sea threshold by > 0.15 nat)",
+   "ships": 69,
+   "share_of_losses_%": 2.59009009009009,
+   "Pd_points_%": 0.40705563093622793
+  }
+ ],
+ "loss_predictor_auc": 0.930633700185939,
+ "loss_importance": {
+  "dxMax": 0.08921996080205034,
+  "ringOwn": 0.08647288808482845,
+  "ringBright": 0.06811477963716772,
+  "ringOther": 0.04127624503743914,
+  "distBorder": 0.03737313432835827,
+  "pBright": 0.021514045931956428,
+  "bw": 0.020819337655158598,
+  "zMax": 0.01890265842504655,
+  "meanC2": 0.01790341223177052,
+  "areaMask": 0.015482989094929445,
+  "bh": 0.01113282074476114,
+  "c2Bg": 0.004330267852656044,
+  "mx": 0.0036705362078497173,
+  "sdBg": 0.0036508367254636464,
+  "sx": 0.0028262726770189816,
+  "nbrDist": 0.0025631438765768345,
+  "nShips": 0.001911251821699622,
+  "pDark": 0.0013821800090457303,
+  "muBg": 0.000796421930750335
+ }
+}
