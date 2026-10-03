@@ -70,8 +70,37 @@ Network (`cnn/train_q3.py`, tied-scale QAT): fine tower (as before, 800 features
 * Quartus (`_quartus/cascade_ctx_jtag`): **11,856 ALM (28 %), 394 M10K (71 %), 96 DSP (86 %)**, setup +0.78 ns at 100 MHz, +3.97 ns at 50 MHz, all hold slacks positive.
 * **Board (DE10-Standard): 5 frames, then 1,000 frames / 71,380 events, every frame bit-exact** (events, logits, accept flags vs the Python models). After-last-pixel time (prescreen + CNN) mean 32.7 ms, median 16.6 ms, p95 94.6 ms, max 755 ms. Host: `board_ctx.py`, `board_sweep_ctx.py`; results `Results/sweep_ctx1000`.
 
-## 6. Open items
+## 6. Whole-data-set board sweep and training statistics (2026-10-04)
 
-* Power measurement (not done for either design).
-* Context-tower seeds / confidence intervals (one seed, one split).
+**Whole data set on the board** (`board_sweep_ctx.py --n 5604`, context bitstream, theta -14462 stored with every event's logit; `Results/sweep_ctx_all`): 5,604 frames, 1,015,171 events, 0 mismatches against the golden models, prescreen 9.01 ms on every frame. `fixedpoint/eval_full_sweep.py sweep_ctx_all ctx` evaluates two systems from this one sweep: Weibull only (every event accepted) and Weibull + CNN (logit >= theta, thetas -5979 / -10695 / -14462 / -17056 from validation for 90 / 95 / 97 / 98 % retention), with 1,000-resample image bootstraps (`Results/fixedpoint/full_ctx_metrics.csv`, `full_ctx_curves.json`, figure `Figures/fixedpoint_full_sweep.png`, `fixedpoint/fig_full_sweep.py`).
+
+| subset | system | recall (95 % CI) | inshore | offshore | false events / img | precision |
+|---|---|---|---|---|---|---|
+| all 5,604 | Weibull only | 99.61 % (99.48-99.73) | 99.22 | 99.98 | 166.0 | 0.018 |
+| all | + CNN 90 % | 88.57 | 77.98 | 98.50 | 0.38 | 0.876 |
+| all | + CNN 95 % | 94.08 | 88.52 | 99.30 | 1.12 | 0.717 |
+| all | + CNN 97 % | 96.70 (96.32-97.04) | 93.59 | 99.61 | 2.31 | 0.558 |
+| all | + CNN 98 % | 97.67 | 95.49 | 99.71 | 3.62 | 0.450 |
+| test 842 | Weibull only | 99.72 (99.52-99.89) | 99.52 | 99.93 | 172.6 | 0.019 |
+| test | + CNN 95 % | 93.60 (92.04-95.04) | 88.74 | 98.65 | 1.28 | 0.714 |
+| test | + CNN 97 % | 96.21 (95.07-97.19) | 93.38 | 99.15 | 2.64 | 0.555 |
+| test | + CNN 98 % | 97.43 (96.61-98.15) | 95.57 | 99.36 | 4.05 | 0.451 |
+
+Train, validation and test recalls agree within their intervals at every operating point (train and validation are in-sample for the CNN; the prescreen has no training). The CNN removes 98.6 % of the false events at the 97 % target for a 2.9-point recall cost on all images. The test rows reproduce the software evaluation (96.2 % @ 2.64).
+
+**Seeds and splits** (`cnn/run_seeds.sh`; `fixedpoint/seeds_metrics.py`, `seeds_report.py`, `seeds_pair.py`; `Results/fixedpoint/seeds_all_runs.csv`, `seeds_summary.csv`, `seeds_paired.csv`): per network five runs = original (sd1) + seeds 2, 3 on the original split + splits 20261004 and 20261005 (seed 1), each with its own validation thresholds and test images; test-split mean +- s.d. over the five runs:
+
+| target | context recall | context FA / img | single-tower recall | single-tower FA / img |
+|---|---|---|---|---|
+| 90 % | 88.2 +- 1.5 | 0.52 +- 0.12 | 87.8 +- 1.8 | 0.79 +- 0.13 |
+| 95 % | 93.9 +- 1.1 | 1.47 +- 0.38 | 93.7 +- 1.3 | 2.14 +- 0.33 |
+| 97 % | 96.0 +- 0.8 | 2.54 +- 0.58 | 95.9 +- 1.1 | 3.40 +- 0.59 |
+| 98 % | 97.3 +- 0.8 | 3.83 +- 0.84 | 97.2 +- 0.9 | 5.18 +- 0.83 |
+
+Paired by run, the context network has fewer false events in 5 of 5 pairs at every target (mean reduction 35 / 32 / 26 / 27 % at 90 / 95 / 97 / 98 %), while the recall difference is +0.1 to +0.4 points on average with a range that includes zero and negative values. **Correction of the earlier claim**: the "+2 points of recall at equal false events" came from the single original run; across runs the robust effect of the context tower is fewer false events at about equal recall. Run-to-run recall s.d. (about 1 point) is larger than the recall difference.
+
+## 7. Open items
+
+* Power measurement (not done for any design).
 * Optional: overlap the next candidate's fetch with the CNN compute (the core input memory is currently idle-blocked for about 15 % of each candidate's time).
+* Optional: on-board whole-data-set sweep of the single-tower bitstream (not needed for the comparison; its software scores cover all images).
