@@ -99,7 +99,11 @@ Train, validation and test recalls agree within their intervals at every operati
 
 Paired by run, the context network has fewer false events in 5 of 5 pairs at every target (mean reduction 35 / 32 / 26 / 27 % at 90 / 95 / 97 / 98 %), while the recall difference is +0.1 to +0.4 points on average with a range that includes zero and negative values. **Correction of the earlier claim**: the "+2 points of recall at equal false events" came from the single original run; across runs the robust effect of the context tower is fewer false events at about equal recall. Run-to-run recall s.d. (about 1 point) is larger than the recall difference.
 
-## 7. Open items
+## 7. Literature screened 2026-10-04 (`papers/new_references`, 22 unique papers)
+
+Added to `PAPER2_HRSID_literature_comparison.docx` (sections 4a / 4b, Tables 1a / 1b, refs [22]-[41]). Five report HRSID results (GL-DETR, AD-YOLO, AMFS-Net, LightSAR-Net, Gao's SAR-Net); none reports an FPGA/ASIC implementation. Challenges, by weight: (1) 1.6-2.8 M-parameter YOLO derivatives reach 91.8-95.8 % AP50 on HRSID at 7 GFLOPs (we use 21-37x fewer parameters and ~0.84 GFLOP/frame on average, but they output boxes; comparison is indicative); (2) at matched recall our precision equals AD-YOLO (91.3-93.8 % at 83.8 % recall) but is 3-6 points below GL-DETR at 87.6 % recall (F1 0.866-0.882 vs 0.895); (3) the Wilcoxon nonparametric CFAR (JSTARS 2025, comparators only) is an untested alternative to the Weibull test - suggested experiment: run it through the same event/CNN/board pipeline; (4) censored/trimmed/superpixel CFAR papers target the self-masking loss, but the prescreen is no longer the recall limit (99.6 %); (5) CFAR-guided DL exists (CFAR-DP-FW, LS-SSDD), so the novelty is the integer bit-exact board-verified implementation. The "15-47x larger" statement became "about 5 to 47x" (ELSD-Net 0.3 M params, SSDD only).
+
+## 8. Open items
 
 * Power measurement (not done for any design).
 * Optional: overlap the next candidate's fetch with the CNN compute (the core input memory is currently idle-blocked for about 15 % of each candidate's time).
