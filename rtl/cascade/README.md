@@ -83,7 +83,7 @@ Bit-exact fixed-point Weibull detection + this trigger/gate + pooled-store patch
 with `Fixed=true`, `_comparison/cnn/eval_hwexact.py`): 1,630 triggers/img, 274 gated events/img, 89.3% of GT ships reachable.
 At the 90% validation operating point: XL 88.0% ship retention at 1.74 FA/img, DEEP 87.9% at 1.98, SMALL 86.8% at 2.71
 (CFAR alone: ~1,600 FA/img) — ~15 candidates/img out. These agree with the float-pipeline test split, so the float-derived
-training data is representative of what this RTL produces. Details and CIs: `PAPER2_CNN_HW_STUDY_2026-10-02.md` §9.
+training data is representative of what this RTL produces.
 
 ## Bug found while verifying the board wrapper
 

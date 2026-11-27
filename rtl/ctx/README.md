@@ -1,7 +1,7 @@
-# Context-tower cascade (Paper 2)
+# Context-tower cascade
 
 Pooled Weibull prescreen (`../prescreen/`) + INT8 context CNN: fine tower + context tower (4x4-pooled 128x128-px field of view) + 9 hardware-exact side codes.
-See `PAPER2_FIXEDPOINT_RTL_PRESCREEN_2026-10-03.md` section 5 for results.
+Results: see the top-level README.
 
 | file | role |
 |---|---|

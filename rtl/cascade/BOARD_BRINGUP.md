@@ -1,10 +1,10 @@
-# Cascade board bring-up (Paper 2 project; separate from the Paper 3 multi-model bring-up in ../../DE10_BRINGUP.md)
+# Cascade board bring-up
 
 
 ## Weibull prescreen + INT8 CNN cascade board demo -- BUILT 2026-10-02, RUN ON THE BOARD 2026-10-03 (default switches matched simulation: HEX5..3=018, HEX2..0=007, LEDR[9:6]=0111; programmed via `quartus_pgm -m jtag -c "DE-SoC [USB-1]" -o "p;output_files/cascade_de10_top.sof@2"`)
 
-A different kind of bitstream from the five detector demos above: the full two-stage cascade
-(`rtl/cascade/`, `rtl/cnn/`; README in `rtl/cascade/README.md`), self-contained like the others -- a 128x128
+The full two-stage cascade
+(`rtl/cascade/`, `rtl/cnn/`; README in `rtl/cascade/README.md`), self-contained -- a 128x128
 HRSID crop (`cascade_demo_image.hex`, 16 kB) sits in on-chip ROM and is streamed through Weibull -> trigger/gate
 -> pooled frame store, then every candidate event is classified by the CNN, then the result is shown for ~2 s
 and the loop repeats.
