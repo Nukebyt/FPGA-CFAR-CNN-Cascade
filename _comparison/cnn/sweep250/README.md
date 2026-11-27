@@ -1,4 +1,4 @@
-# sweep250: cascade vs Weibull-only on 250 held-out HRSID test images (Paper 2)
+# sweep250: cascade vs Weibull-only on 250 held-out HRSID test images
 
 Software, bit-exact model of the hardware (NOT run on the FPGA): MATLAB fixed-point Weibull (`../../sweep250_extract.m`)
 + Python integer-exact INT8 CNN (`quant_hw.int_forward`). Definitions are in the docstring of `sweep250.py`.

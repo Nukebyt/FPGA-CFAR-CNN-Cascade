@@ -1,4 +1,4 @@
-# JTAG-fed cascade (Paper 2 board flow for many full frames)
+# JTAG-fed cascade (board flow for many full frames)
 
 The 128x128 demo (`../cascade_de10_top.v`) streams one crop from ROM. This design lets the PC push **any 800x800 image**
 into the same cascade over the USB-Blaster JTAG cable and read the candidate events + CNN logits back -- no HPS, no Linux,

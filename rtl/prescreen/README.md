@@ -1,11 +1,11 @@
-# Pooled-domain Weibull prescreen — fixed-point model and RTL (Paper 2)
+# Pooled-domain Weibull prescreen — fixed-point model and RTL
 
 Status 2026-10-03. Golden model, RTL (`prescreen_core.v`, `peak5.v`, `prescreen_top.v`, `cascade_ps_2clk.v`) and bit-exact simulation are in place.
 The numbers below are measured; anything not measured is listed under "Open items".
 
 ## What it computes
 
-Config A of the Pd study (`PAPER2_PD_ROADMAP…md` §11): **2×2 pooled** log image, ring window **25/17** (N = 336 cells, 4 pixels thick on the pooled grid, 8 px at full resolution),
+Config A of the detection-probability study: **2×2 pooled** log image, ring window **25/17** (N = 336 cells, 4 pixels thick on the pooled grid, 8 px at full resolution),
 Pfa selectable from {3e-2, 1e-2, 1e-3, 1e-4}, gate on the contrast, **5×5 contrast-peak events**, mirrored (symmetric) image border.
 
 Everything is integer (`_comparison/fixedpoint/prescreen_fx.py` is the golden model, the RTL is bit-exact to it):
